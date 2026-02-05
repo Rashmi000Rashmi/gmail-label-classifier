@@ -12,6 +12,7 @@ __pycache__/
 
 # --- 📊 LOCAL DATA & LOGS ---
 data/
+!data/metrics.csv
 state/
 kaggle_dataset/
 results/

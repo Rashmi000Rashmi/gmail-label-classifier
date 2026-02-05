@@ -6,3 +6,7 @@ transformers
 datasets
 beautifulsoup4
 pandas
+accelerate
+huggingface_hub
+streamlit
+plotly

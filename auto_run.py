@@ -24,6 +24,8 @@ def main():
     if choice == '1':
         print("\nPhase: Classifying Unread Emails...")
         run_step(['python', 'scripts/classify_emails.py'])
+        print("\nPhase: Updating Dashboard Metrics...")
+        run_step(['python', 'scripts/extract_metrics.py'])
         
     elif choice == '2':
         print("\nPhase 1: Syncing Labels...")
@@ -32,6 +34,8 @@ def main():
         run_step(['python', 'scripts/local_train.py'])
         print("\nPhase 3: Classifying Unread Emails...")
         run_step(['python', 'scripts/classify_emails.py'])
+        print("\nPhase 4: Updating Dashboard Metrics...")
+        run_step(['python', 'scripts/extract_metrics.py'])
 
     elif choice == '3':
         print("\nPhase 1: Syncing Labels...")
@@ -40,6 +44,8 @@ def main():
         run_step(['python', 'scripts/kaggle_automate.py'])
         print("\nPhase 3: Classifying Unread Emails...")
         run_step(['python', 'scripts/classify_emails.py'])
+        print("\nPhase 4: Updating Dashboard Metrics...")
+        run_step(['python', 'scripts/extract_metrics.py'])
         
     elif choice == '4':
         print("\nPhase: Syncing Labels and Preparing Dataset...")

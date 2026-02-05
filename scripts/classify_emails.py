@@ -127,9 +127,30 @@ def apply_label(service, msg_id, label_name):
         }
     ).execute()
 
+def ensure_labels_exist(service):
+    """Checks for required labels and creates them if missing."""
+    print("📋 Checking Gmail labels...")
+    required_labels = ["Application_Confirmation", "Rejected", "Uncertain"]
+    
+    results = service.users().labels().list(userId='me').execute()
+    existing_labels = [l['name'] for l in results.get('labels', [])]
+    
+    for label_name in required_labels:
+        if label_name not in existing_labels:
+            print(f"➕ Creating label: {label_name}")
+            label_body = {
+                'name': label_name, 
+                'labelListVisibility': 'labelShow', 
+                'messageListVisibility': 'show'
+            }
+            service.users().labels().create(userId='me', body=label_body).execute()
+
 def main():
     service = get_gmail_service()
     if not service: return
+
+    # Ensure environment is ready for friends
+    ensure_labels_exist(service)
 
     messages = get_unread_emails(service)
     if not messages:
@@ -158,16 +179,17 @@ def main():
 
             # Predict
             pred_idx, conf, key_phrases = predict(full_text)
-            label = LABEL_MAP[pred_idx]
-
+            
             if conf >= CONFIDENCE_THRESHOLD:
+                label = LABEL_MAP[pred_idx]
                 print(f"[{label}] '{subject}' (Conf: {conf:.2f})")
                 if not DRY_RUN:
                     apply_label(service, m['id'], label)
                 report[label].append(subject)
             else:
-                print(f"[UNCERTAIN] '{subject}' (Conf: {conf:.2f}) - Leaving UNREAD.")
-                # We do nothing here, so the email stays unread in Gmail
+                print(f"[UNCERTAIN] '{subject}' (Conf: {conf:.2f}) - Applying 'Uncertain' label.")
+                if not DRY_RUN:
+                    apply_label(service, m['id'], "Uncertain")
                 report["Uncertain"].append(subject)
 
         except Exception as e:

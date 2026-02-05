@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  gmail-classifier:
+    build: .
+    container_name: gmail-classifier
+    volumes:
+      - .:/app
+    # Ensure logs are visible
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # The Dockerfile uses cron + tail -f /var/log/cron.log as CMD.
+    # Volume mapping will ensure that /app/auto_run.py and other files
+    # are always up to date with the local machine.

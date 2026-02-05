@@ -1,0 +1,26 @@
+# --- 🔒 SENSITIVE: DO NOT COMMIT ---
+auth/
+*.json
+!requirements.txt
+!config/kernel-metadata.json
+
+# --- 📦 LARGE FILES & BINARIES ---
+models/
+*.pkl
+*.zip
+__pycache__/
+
+# --- 📊 LOCAL DATA & LOGS ---
+data/
+state/
+kaggle_dataset/
+results/
+logs/
+
+# --- 🛠️ IDE & OS ---
+.vscode/
+.idea/
+.env
+venv/
+.DS_Store
+Thumbs.db

@@ -1,12 +1,3 @@
-import sys
-import types
-
-# Polyfill for imghdr (removed in Python 3.13)
-# Streamlit internally imports this, so we provide a dummy module to prevent crash.
-if sys.version_info >= (3, 13):
-    sys.modules['imghdr'] = types.ModuleType('imghdr')
-    sys.modules['imghdr'].what = lambda *args, **kwargs: None
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px

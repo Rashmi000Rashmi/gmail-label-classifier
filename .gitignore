@@ -11,7 +11,7 @@ models/
 __pycache__/
 
 # --- 📊 LOCAL DATA & LOGS ---
-data/
+data/*
 !data/metrics.csv
 state/
 kaggle_dataset/

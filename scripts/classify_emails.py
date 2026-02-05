@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 # --- Configuration ---
 MODEL_PATH = os.path.join('models', 'email_classifier_model')
-REMOTE_MODEL_ID = "your-username/gmail-classifier" # <-- Friends can set your repo ID here
+REMOTE_MODEL_ID = "Rashmi000/Gmail_Label" # <-- Live model on Hugging Face
 SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 CONFIDENCE_THRESHOLD = 0.85
 LABEL_MAP = {0: "Application_Confirmation", 1: "Rejected"}

@@ -8,6 +8,6 @@ beautifulsoup4
 pandas
 accelerate
 huggingface_hub
-streamlit
+streamlit>=1.41.0
 plotly
 altair<5
